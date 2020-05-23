@@ -1,0 +1,29 @@
+'use strict';
+
+const mock = require('egg-mock');
+const assert = require('assert');
+
+describe('test/tracing.auto_generate.test.js', () => {
+  let app;
+  before(() => {
+    app = mock.app({
+      baseDir: 'apps/tracing-test-auto-generate',
+    });
+    return app.ready();
+  });
+
+  after(() => app.close());
+  afterEach(mock.restore);
+
+  it('should auto generate parentSpanId & requestId & spanId', () => {
+    return app.httpRequest()
+      .get('/')
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .then(response => {
+        assert(response.body.requestId);
+        assert(response.body.spanId);
+        assert(response.body.parentSpanId);
+      });
+  });
+});
