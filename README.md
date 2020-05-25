@@ -64,9 +64,9 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
 /**
- * Get tracer object through **ctx**, **ctx.request** or **ctx.response**.
+ * Get tracer object through ctx, ctx.request or ctx.response.
  *
- * @params {string} tracer.requestId    - generate by plugin automatically if http headers doesn't include request-id.
+ * @params {string} tracer.traceId    - generate by plugin automatically if http headers doesn't include trace-id.
  * @params {string} tracer.spanId       - generate by plugin automatically.
  * @params {string} tracer.parentSpanId - get from http header of span-id.
  * 
