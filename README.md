@@ -24,7 +24,7 @@
 [download-image]: https://img.shields.io/npm/dm/egg-tracing.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-tracing
 
-Eggjs tracer plugin which can generator a new tracer object to each **ctx/ctx.request/ctx.response** instance automatically.
+  Eggjs tracer plugin which can generate a new tracer object for each **ctx, ctx.request and ctx.response** instance automatically.
 
 ## Install
 
@@ -66,7 +66,7 @@ class HomeController extends Controller {
 /**
  * Get tracer object through ctx, ctx.request or ctx.response.
  *
- * @params {string} tracer.traceId    - generate by plugin automatically if http headers doesn't include trace-id.
+ * @params {string} tracer.traceId      - generate by plugin automatically if http headers doesn't include trace-id.
  * @params {string} tracer.spanId       - generate by plugin automatically.
  * @params {string} tracer.parentSpanId - get from http header of span-id.
  * 

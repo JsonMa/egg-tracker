@@ -61,10 +61,10 @@ exports.tracing = {
 
 // {app_root}/config/config.default.js
 exports.tracing = {
-    autoGenerateParentSpanId: false, // Generate parent span-id automatically if http request headers doesn't include it.
+    autoGenerateParentSpanId: false, // 是否自动生成父节点的spanId
 };
 
-exports.middleware = ['tracing'] // Enable tracing middleware
+exports.middleware = ['tracing'] // 启用tracing中间件
 
 ```
 
@@ -79,9 +79,9 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
 /**
- * Get tracer object through ctx, ctx.request or ctx.response.
+ * 通过ctx, ctx.request or ctx.response等方式获取tracer对象.
  *
- * @params {string} tracer.traceId    - generate by plugin automatically if http headers doesn't include trace-id.
+ * @params {string} tracer.traceId      - generate by plugin automatically if http headers doesn't include trace-id.
  * @params {string} tracer.spanId       - generate by plugin automatically.
  * @params {string} tracer.parentSpanId - get from http header of span-id.
  * 
