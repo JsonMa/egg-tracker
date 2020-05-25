@@ -1,7 +1,7 @@
 {
   "name": "egg-tracker",
   "version": "1.0.0",
-  "description": "egg http request tracer",
+  "description": "egg http request tracker",
   "eggPlugin": {
     "name": "tracker"
   },

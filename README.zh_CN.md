@@ -24,7 +24,7 @@
 [download-image]: https://img.shields.io/npm/dm/egg-tracker.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-tracker
 
-Eggjs tracer 插件 - 自动为每个HTTP请求生成tracer对象（该tracer对象包含了traceId、spanId、parentSpanId属性），并将其注入到了ctx, ctx.request, ctx,response中。
+Eggjs tracker 插件 - 自动为每个HTTP请求生成tracker对象（该tracker对象包含了traceId、spanId、parentSpanId属性），并将其注入到了ctx, ctx.request, ctx,response中。
 
 ## 依赖说明
 
@@ -81,16 +81,16 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
 /**
- * 通过ctx, ctx.request or ctx.response等方式获取tracer对象.
+ * 通过ctx, ctx.request or ctx.response等方式获取tracker对象.
  *
- * @params {string} tracer.traceId      - generate by plugin automatically if http headers doesn't include trace-id.
- * @params {string} tracer.spanId       - generate by plugin automatically.
- * @params {string} tracer.parentSpanId - get from http header of span-id.
+ * @params {string} tracker.traceId      - generate by plugin automatically if http headers doesn't include trace-id.
+ * @params {string} tracker.spanId       - generate by plugin automatically.
+ * @params {string} tracker.parentSpanId - get from http header of span-id.
  * 
  * @memberof HomeController
  */
   async index() {
-    this.ctx.body = this.ctx.tracer;
+    this.ctx.body = this.ctx.tracker;
   }
 }
 
