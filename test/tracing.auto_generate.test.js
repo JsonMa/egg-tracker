@@ -15,13 +15,13 @@ describe('test/tracing.auto_generate.test.js', () => {
   after(() => app.close());
   afterEach(mock.restore);
 
-  it('should auto generate parentSpanId & requestId & spanId', () => {
+  it('should auto generate parentSpanId & traceId & spanId', () => {
     return app.httpRequest()
       .get('/')
       .expect(200)
       .expect('Content-Type', /json/)
       .then(response => {
-        assert(response.body.requestId);
+        assert(response.body.traceId);
         assert(response.body.spanId);
         assert(response.body.parentSpanId);
       });

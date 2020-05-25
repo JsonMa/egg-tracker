@@ -16,43 +16,43 @@ describe('test/tracing.test.js', () => {
   after(() => app.close());
   afterEach(mock.restore);
 
-  it('should response with requestId', () => {
+  it('should response with traceId', () => {
     return app.httpRequest()
       .get('/')
       .expect(200)
       .expect('Content-Type', /json/)
       .then(response => {
-        assert(response.body.requestId);
+        assert(response.body.traceId);
         assert(response.body.spanId);
         assert.equal(Reflect.has(response.body, 'parentSpanId'), false);
       });
   });
 
   it('should response with parentSpanId', () => {
-    const requestId = uuidv1();
+    const traceId = uuidv1();
     const spanId = uuidv1();
     return app.httpRequest()
       .get('/')
       .set('Span-Id', spanId)
-      .set('Request-Id', requestId)
+      .set('Trace-Id', traceId)
       .expect(200)
       .expect('Content-Type', /json/)
       .then(response => {
-        assert.equal(response.body.requestId, requestId);
+        assert.equal(response.body.traceId, traceId);
         assert(response.body.spanId);
         assert.equal(response.body.parentSpanId, spanId);
       });
   });
 
   it('should response without parentSpanId', () => {
-    const requestId = uuidv1();
+    const traceId = uuidv1();
     return app.httpRequest()
       .get('/')
-      .set('Request-Id', requestId)
+      .set('Trace-Id', traceId)
       .expect(200)
       .expect('Content-Type', /json/)
       .then(response => {
-        assert.equal(response.body.requestId, requestId);
+        assert.equal(response.body.traceId, traceId);
         assert(response.body.spanId);
         assert.equal(Reflect.has(response.body, 'parentSpanId'), false);
       });
