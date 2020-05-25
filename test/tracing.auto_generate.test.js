@@ -22,8 +22,9 @@ describe('test/tracing.auto_generate.test.js', () => {
       .expect('Content-Type', /json/)
       .then(response => {
         assert(response.body.traceId);
-        assert(response.body.spanId);
+        assert(!response.body.spanId);
         assert(response.body.parentSpanId);
+        assert(response.body.traceId.includes('-'));
       });
   });
 });

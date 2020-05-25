@@ -1,17 +1,19 @@
 {
-  "name": "egg-tracing",
+  "name": "egg-tracker",
   "version": "1.0.0",
   "description": "egg http request tracer",
   "eggPlugin": {
-    "name": "tracing"
+    "name": "tracker"
   },
   "keywords": [
     "egg",
     "eggPlugin",
     "egg-plugin",
+    "egg-tracker",
     "egg-tracing",
     "egg-tracer",
     "tracing",
+    "tracker",
     "tracer"
   ],
   "dependencies": {
@@ -49,12 +51,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eggjs/egg-tracing.git"
+    "url": "git+https://github.com/eggjs/egg-tracker.git"
   },
   "bugs": {
     "url": "https://github.com/eggjs/egg/issues"
   },
-  "homepage": "https://github.com/eggjs/egg-tracing#readme",
+  "homepage": "https://github.com/eggjs/egg-tracker#readme",
   "author": "jsonma",
   "husky": {
     "hooks": {
