@@ -4,7 +4,8 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    this.ctx.body = this.ctx.tracker;
+    const { key } = this.ctx.app.config.tracker;
+    this.ctx.body = this.ctx[key];
   }
 }
 

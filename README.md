@@ -24,7 +24,7 @@
 [download-image]: https://img.shields.io/npm/dm/egg-tracker.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-tracker
 
-  Eggjs tracker plugin which can generate a new tracker object for each **ctx, ctx.request and ctx.response** instance automatically.
+Eggjs tracker plugin which can generate a new tracker object for each **ctx, ctx.request and ctx.response** instance automatically.
 
 ## Install
 
@@ -39,7 +39,7 @@ $ npm i egg-tracker --save
 exports.tracker = {
   enable: true,
   package: 'egg-tracker',
-};
+}
 ```
 
 ## Configuration
@@ -50,38 +50,38 @@ exports.tracker = {
   format: 'random', // 32 byte random string or uuid string, random as default（数据格式，默认为32字节字符串）
   autoGenerateSpanId: true, // Enable auto generate span-id (默认开启自动生成span-id)
   autoGenerateParentSpanId: false, // Disable auto generate parent span-id (默认关闭自动创建parent span-id)
-};
+  key: 'tracker', // key of tracker object to attach to ctx/ctx.request/ctx.response
+}
 
 exports.middleware = ['tracker'] // Enable tracker middleware
-
 ```
 
 see [config/config.default.js](config/config.default.js) for more detail.
 
 ## Example
+
 ```js
 // {app_root}/controller/index.js
 
-const Controller = require('egg').Controller;
+const Controller = require('egg').Controller
 
 class HomeController extends Controller {
-/**
- * Get tracker object through ctx, ctx.request or ctx.response.
- *
- * @params {string} tracker.traceId      - generate by plugin automatically if http headers doesn't include trace-id.
- * @params {string} tracker.spanId       - generate by plugin automatically.
- * @params {string} tracker.parentSpanId - get from http header of span-id.
- * 
- * @memberof HomeController
- */
+  /**
+   * Get tracker object through ctx, ctx.request or ctx.response.
+   *
+   * @params {string} tracker.traceId      - generate by plugin automatically if http headers doesn't include trace-id.
+   * @params {string} tracker.spanId       - generate by plugin automatically.
+   * @params {string} tracker.parentSpanId - get from http header of span-id.
+   *
+   * @memberof HomeController
+   */
   async index() {
-    this.ctx.body = this.ctx.tracker;
+    this.ctx.body = this.ctx.tracker
   }
 }
 
-module.exports = HomeController;
+module.exports = HomeController
 ```
-
 
 ## Questions & Suggestions
 

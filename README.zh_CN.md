@@ -24,16 +24,16 @@
 [download-image]: https://img.shields.io/npm/dm/egg-tracker.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-tracker
 
-Eggjs tracker 插件 - 自动为每个HTTP请求生成tracker对象（该tracker对象包含了traceId、spanId、parentSpanId属性），并将其注入到了ctx, ctx.request, ctx,response中。
+Eggjs tracker 插件 - 自动为每个 HTTP 请求生成 tracker 对象（该 tracker 对象包含了 traceId、spanId、parentSpanId 属性），并将其注入到了 ctx, ctx.request, ctx,response 中。
 
 ## 依赖说明
 
 ### 依赖的 egg 版本
 
-egg-tracker 版本 | egg 1.x
---- | ---
-1.x | 😁
-0.x | ❌
+| egg-tracker 版本 | egg 1.x |
+| ---------------- | ------- |
+| 1.x              | 😁      |
+| 0.x              | ❌      |
 
 ## 开启插件
 
@@ -42,32 +42,31 @@ egg-tracker 版本 | egg 1.x
 exports.tracker = {
   enable: true,
   package: 'egg-tracker',
-};
+}
 ```
 
 ## 名词注解
 
-- traceId: 请求ID，具有全局唯一性，用于标识一个具体的HTTP请求，当HTTP header中不携带**trace-id** 时，插件会自动生成该ID。
-- spanId: 跨度ID，具有全局唯一性，服务启用插件后，插件自动为该服务的每个HTTP请求自动生成spanId。
-- parentSpanId: 负节点跨度ID，具有全局唯一性，上一个服务节点所生成的spanId, 插件通过自定义的HTTP header **span-id** 来获取该值, 若不存在，则以为着该节点为根节点，其值默认为 **"-1"** 。
+- traceId: 请求 ID，具有全局唯一性，用于标识一个具体的 HTTP 请求，当 HTTP header 中不携带**trace-id** 时，插件会自动生成该 ID。
+- spanId: 跨度 ID，具有全局唯一性，服务启用插件后，插件自动为该服务的每个 HTTP 请求自动生成 spanId。
+- parentSpanId: 负节点跨度 ID，具有全局唯一性，上一个服务节点所生成的 spanId, 插件通过自定义的 HTTP header **span-id** 来获取该值, 若不存在，则以为着该节点为根节点，其值默认为 **"-1"** 。
 
 ## 使用场景
 
-- 链路追踪：本插件能为每个HTTP请求自动生成全局唯一的spanId, 结合traceId + parentSpanId能够快速的构建完成的HTTP请求树。
+- 链路追踪：本插件能为每个 HTTP 请求自动生成全局唯一的 spanId, 结合 traceId + parentSpanId 能够快速的构建完成的 HTTP 请求树。
 
 ## 详细配置
 
 ```js
-
 // {app_root}/config/config.default.js
 exports.tracker = {
   format: 'random', // 32 byte random string or uuid string, random as default（数据格式，默认为32字节字符串）
   autoGenerateSpanId: true, // Enable auto generate span-id (默认开启自动生成span-id)
   autoGenerateParentSpanId: false, // Disable auto generate parent span-id (默认关闭自动创建parent span-id)
-};
+  key: 'tracker', // key of tracker object to attach to ctx/ctx.request/ctx.response
+}
 
 exports.middleware = ['tracker'] // 启用tracker中间件
-
 ```
 
 请到 [config/config.default.js](config/config.default.js) 查看详细配置项说明。
@@ -77,24 +76,24 @@ exports.middleware = ['tracker'] // 启用tracker中间件
 ```js
 // {app_root}/controller/index.js
 
-const Controller = require('egg').Controller;
+const Controller = require('egg').Controller
 
 class HomeController extends Controller {
-/**
- * 通过ctx, ctx.request or ctx.response等方式获取tracker对象.
- *
- * @params {string} tracker.traceId      - generate by plugin automatically if http headers doesn't include trace-id.
- * @params {string} tracker.spanId       - generate by plugin automatically.
- * @params {string} tracker.parentSpanId - get from http header of span-id.
- * 
- * @memberof HomeController
- */
+  /**
+   * 通过ctx, ctx.request or ctx.response等方式获取tracker对象.
+   *
+   * @params {string} tracker.traceId      - generate by plugin automatically if http headers doesn't include trace-id.
+   * @params {string} tracker.spanId       - generate by plugin automatically.
+   * @params {string} tracker.parentSpanId - get from http header of span-id.
+   *
+   * @memberof HomeController
+   */
   async index() {
-    this.ctx.body = this.ctx.tracker;
+    this.ctx.body = this.ctx.tracker
   }
 }
 
-module.exports = HomeController;
+module.exports = HomeController
 ```
 
 ## 提问交流

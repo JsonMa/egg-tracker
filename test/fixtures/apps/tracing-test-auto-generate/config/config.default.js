@@ -7,5 +7,6 @@ module.exports = {
     autoGenerateSpanId: false, // 是否自动创建parentSpanId,当http header中不存在时
     format: 'uuid',
     autoGenerateParentSpanId: true, // 是否自动创建parentSpanId,当http header中不存在时
+    key: 'tracer', // key of tracker object to attach to ctx/ctx.request/ctx.response
   },
 };
